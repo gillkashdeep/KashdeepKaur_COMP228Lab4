@@ -15,8 +15,7 @@ public class StudentForm  extends JFrame implements ActionListener, EventListene
     private final JLabel postalcodeLabel;
     private final JLabel phonenumberLabel;
     private final JLabel emailLabel;
-    private final JLabel volunteerworkLabel;
-    private final JLabel studentcouncilLabel;
+
     private final JTextField nameText;
     private final JTextField addressText;
     private final JTextField ProvinceText;
@@ -27,8 +26,11 @@ public class StudentForm  extends JFrame implements ActionListener, EventListene
     private final JCheckBox studentcouncilcheck;
     private final JRadioButton computerRadio, BussinessRadio;
     private final ButtonGroup radioGroup;
-    private final JTextArea display = new JTextArea(4, 75);
-    private static final String[] names = {"Java", "ProgrammingII", "ProgrammingIII", "C#"};
+    private final JTextArea display = new JTextArea(6,70);
+    private final JPanel west, east, eastNorth, eastCenter, south, center,southArea;
+    //private final JPanel CheckBoxPanel;
+    private final JScrollPane scroll;
+   // private static final String[] names = {"Java", "ProgrammingII", "ProgrammingIII", "C#"};
     private final String[] icons = new String[4];
     public final JComboBox<String> courses;
     public final JList<String> coursesField;
@@ -37,58 +39,92 @@ public class StudentForm  extends JFrame implements ActionListener, EventListene
     public StudentForm() {
         super("Student Form");
         setLayout(new FlowLayout());
+        //Finally adding content management
+        west = new JPanel();
+        east = new JPanel();
+        eastNorth = new JPanel();
+        eastCenter = new JPanel();
+        south = new JPanel();
+        southArea = new JPanel();
+        center = new JPanel();
+        //CheckBoxPanel = new JPanel();
+        setLayout(new BorderLayout(4, 4));
+        west.setLayout(new GridLayout(7, 1, 3, 3));
+        add(west, BorderLayout.WEST);
+        add(east, BorderLayout.EAST);
+        add(south, BorderLayout.SOUTH);
+        add(center, BorderLayout.CENTER);
+        south.add(southArea);
+        southArea.setLayout(new BoxLayout(southArea, BoxLayout.Y_AXIS));
+        east.setLayout(new BorderLayout(2, 40));
+        east.add(eastNorth, BorderLayout.NORTH);
+        eastNorth.setLayout(new FlowLayout());
+        east.add(eastCenter, BorderLayout.CENTER);
+        eastCenter.setLayout(new GridLayout(2, 1, 0, 0));
+
+        //Form contents Label and TextFields
+
         nameLabel = new JLabel("Name");
-        add(nameLabel);
+        west.add(nameLabel);
         nameText = new JTextField(15);
-        add(nameText);
+        west.add(nameText);
         addressLabel = new JLabel("Address");
-        add(addressLabel);
+        west.add(addressLabel);
         addressText = new JTextField(15);
-        add(addressText);
+        west.add(addressText);
         ProvinceLabel = new JLabel("Province");
-        add(ProvinceLabel);
+        west.add(ProvinceLabel);
         ProvinceText = new JTextField(15);
-        add(ProvinceText);
+        west.add(ProvinceText);
         postalcodeLabel = new JLabel("Postal Code");
-        add(postalcodeLabel);
+        west.add(postalcodeLabel);
         postalcodeText = new JTextField(15);
-        add(postalcodeText);
+        west.add(postalcodeText);
         phonenumberLabel = new JLabel("Phone Number");
-        add(phonenumberLabel);
+        west.add(phonenumberLabel);
         phonenumberText = new JTextField(15);
-        add(phonenumberText);
+        west.add(phonenumberText);
         emailLabel = new JLabel("Email");
-        add(emailLabel);
+        west.add(emailLabel);
         emailText = new JTextField(15);
-        add(emailText);
-        volunteerworkLabel = new JLabel();
-        add(volunteerworkLabel);
+        west.add(emailText);
+
+        center.setLayout(new BorderLayout(2, 2));
         volunteercheck = new JCheckBox("Volunteer");
-        add(volunteercheck);
-        studentcouncilLabel = new JLabel();
-        add(studentcouncilLabel);
+        volunteercheck.setBounds(80,20,10,10);
         studentcouncilcheck = new JCheckBox("Student Council");
-        add(studentcouncilcheck);
+        center.add(volunteercheck,BorderLayout.NORTH);
+        center.add(studentcouncilcheck,BorderLayout.CENTER);
         computerRadio = new JRadioButton("Computer Science");
         BussinessRadio = new JRadioButton("Business");
         radioGroup = new ButtonGroup();
         radioGroup.add(computerRadio);
         radioGroup.add(BussinessRadio);
-        add(computerRadio);
-        add(BussinessRadio);
+        eastNorth.add(computerRadio);
+        eastNorth.add(BussinessRadio);
         coursesField = new JList();
         displayButton = new JButton("Display");
-        add(displayButton);
-        add(display);
+        displayButton.setAlignmentX(JComponent.CENTER_ALIGNMENT);
+        southArea.add(displayButton);
+        scroll = new JScrollPane(display);
+        scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        scroll.setAlignmentX(JComponent.CENTER_ALIGNMENT);
+
+        southArea.add(displayButton);
+        southArea.add(scroll);
         courses= new JComboBox<String>();
+        courses.setMaximumRowCount(4);
+        //courses.setPreferredSize(new Dimension(20, 5));
+        courses.setSize(new Dimension(10, 80));
         displayButton.addMouseListener(this);
         computerRadio.addActionListener(this);
         BussinessRadio.addActionListener(this);
-       // courses.addItemListener(this);
+       //   courses.addItemListener(this);
 
 
-        add(courses);
-        add(coursesField);
+        eastCenter.add(courses);
+        eastCenter.add(coursesField);
 
 
 
