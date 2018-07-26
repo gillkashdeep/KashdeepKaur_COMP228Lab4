@@ -7,5 +7,6 @@ public class StudentTest {
         lFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         lFrame.setSize(260, 180);
         lFrame.setVisible(true);
+        int a= 0;
     }
 }
