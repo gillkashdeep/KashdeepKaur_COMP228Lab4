@@ -8,5 +8,6 @@ public class StudentTest {
         lFrame.setSize(260, 180);
         lFrame.setVisible(true);
         int a= 0;
+        //int b= 0;
     }
 }
